@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.codeu.data.Datastore;
 import com.google.gson.JsonObject;
 
+//stats page will currently only display total number of messages
+
 @WebServlet("/stats")
 public class StatsPageServlet extends HttpServlet{
 

@@ -42,7 +42,9 @@ public class Datastore {
     datastore.put(messageEntity);
   }
 
+
   /** Returns the total number of messages for all users.*/
+  //for use in the stats page
   public int getTotalMessageCount(){
     Query query = new Query("message");
     PreparedQuery results = datastore.prepare(query);
