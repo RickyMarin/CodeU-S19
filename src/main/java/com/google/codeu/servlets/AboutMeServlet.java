@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.google.codeu.data.Datastore;
-
+import com.google.codeu.data.User;
+import org.jsoup.Jsoup;
+import org.jsoup.safety.Whitelist;
 /**
  * Handles fetching and saving user data.
  */
@@ -40,9 +42,13 @@ public class AboutMeServlet extends HttpServlet {
             return;
         }
 
-        String aboutMe = "This is " + user + "'s about me.";
+        User userData = datastore.getUser(user);
 
-        response.getOutputStream().println(aboutMe);
+        if(userData == null || userData.getAboutMe() == null) {
+            return;
+        }
+
+        response.getOutputStream().println(userData.getAboutMe());
     }
 
     @Override
@@ -56,9 +62,10 @@ public class AboutMeServlet extends HttpServlet {
         }
 
         String userEmail = userService.getCurrentUser().getEmail();
+        String aboutMe = Jsoup.clean(request.getParameter("about-me"), Whitelist.none());
 
-        System.out.println("Saving about me for " + userEmail);
-        // TODO: save the data
+        User user = new User(userEmail, aboutMe);
+        datastore.storeUser(user);
 
         response.sendRedirect("/user-page.html?user=" + userEmail);
     }
