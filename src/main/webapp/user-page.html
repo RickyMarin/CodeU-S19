@@ -24,6 +24,46 @@ limitations under the License.
     <script src="/js/user-page-loader.js"></script>
 </head>
 <body onload="buildUI();">
+<style>
+    body{
+        margin: 0;
+        background: linear-gradient(white, #ccccff) fixed;
+        font-family: sans-serif;
+    }
+
+    nav{
+        background-color: #ccccff;
+        font-size: 18pt;
+        padding: 10px;
+    }
+
+    nav a {
+        color: black;
+        margin-right: 10px;
+    }
+
+    h2 {
+        margin: 0;
+    }
+
+    input[type=submit]{
+        background-color: #ccccff;
+        height: 50px;
+        width: 100px;
+        font-size: 14pt;
+    }
+
+    #content {
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #message-input {
+        height: 100px;
+        width: 99%;
+    }
+</style>
 <nav>
     <ul id="navigation">
         <li><a href="/">Home</a></li>
