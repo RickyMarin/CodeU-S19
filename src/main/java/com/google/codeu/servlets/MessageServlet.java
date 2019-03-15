@@ -69,8 +69,7 @@ public class MessageServlet extends HttpServlet {
    *  Helper function that takes a String value and returns a sentiment score of the text
    */
   private float getSentimentScore(String text) throws IOException {
-    Document doc = Document.newBuilder()
-            .setContent(text).setType(Type.PLAIN_TEXT).build();
+    Document doc = Document.newBuilder().setContent(text).setType(Type.PLAIN_TEXT).build();
 
     LanguageServiceClient languageService = LanguageServiceClient.create();
     Sentiment sentiment = languageService.analyzeSentiment(doc).getDocumentSentiment();
