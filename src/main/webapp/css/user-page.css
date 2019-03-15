@@ -28,6 +28,12 @@
   margin-top: 20px;
 }
 
+.message-body img {
+    display: block;
+    margin-top: 25px;
+    max-width: 75%;
+}
+
 /* Add a bottom border to the message header. */
 .message-header {
   border-bottom: thin solid black;

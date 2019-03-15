@@ -14,7 +14,7 @@ import com.google.gson.JsonObject;
 
 public class RegexExample{
     public static void main(String[] args){
-        String regex = "(https?://\\S+\\.(png|jpg))";
+        String regex = "(https?://\\S+\\.(png|jpg|gif))";
         String replacement = "<img src=\"$1\" />";
 
         String text = "here is an image: https://example.com/images/cat.jpg";
