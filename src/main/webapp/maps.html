@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Map Project</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDWeja7PB1u4tKPCJSmArbkC1Ze3HlyNVU"></script>
+    <script>
+        let map;
+        function createMap(){
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: 38.832, lng: -77.197},
+                zoom: 16
+            });
+            const restaurantMarker = new google.maps.Marker({
+                position: {lat: 38.832028, lng: -77.196668},
+                map: map,
+                title: 'Kogiya Korean Barbecue '
+            });
+            var restaurantInfoWindow = new google.maps.InfoWindow({
+                content: 'This is an amazing restaurant with very high quality! Highly recommend!'
+            });
+            restaurantInfoWindow.open(map, restaurantMarker);
+            restaurantMarker.addListener('click', function() {
+                restaurantInfoWindow.open(map, restaurantMarker);
+            });
+        }
+    </script>
+    <style>
+        #map{
+            width: 500px;
+            height: 500px;
+            border: thin solid black;
+        }
+    </style>
+</head>
+<body onload="createMap();">
+<h1>Map Project</h1>
+<div id="map"></div>
+</body>
+</html>

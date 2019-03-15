@@ -29,6 +29,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Whitelist;
+import com.google.cloud.language.v1.Document;
+import com.google.cloud.language.v1.Document.Type;
+import com.google.cloud.language.v1.LanguageServiceClient;
+import com.google.cloud.language.v1.Sentiment;
 
 /** Handles fetching and saving {@link Message} instances. */
 @WebServlet("/messages")
@@ -69,8 +73,9 @@ public class MessageServlet extends HttpServlet {
    *  Helper function that takes a String value and returns a sentiment score of the text
    */
   private float getSentimentScore(String text) throws IOException {
-    Document doc = Document.newBuilder().setContent(text).setType(Type.PLAIN_TEXT).build();
 
+    Document doc = Document.newBuilder().setContent(text).setType(Type.PLAIN_TEXT).build();
+ 
     LanguageServiceClient languageService = LanguageServiceClient.create();
     Sentiment sentiment = languageService.analyzeSentiment(doc).getDocumentSentiment();
     languageService.close();
@@ -99,6 +104,7 @@ public class MessageServlet extends HttpServlet {
     String textWithImagesReplaced = userText.replaceAll(regex, replacement);
 
     Message message = new Message(user, textWithImagesReplaced, sentimentScore);
+  
     datastore.storeMessage(message);
 
     response.sendRedirect("/user-page.html?user=" + user);
