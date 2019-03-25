@@ -4,24 +4,27 @@
     <title>Restaurants</title>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDWeja7PB1u4tKPCJSmArbkC1Ze3HlyNVU"></script>
     <script>
-       // function createRestaurantMap(){
-         //   fetch('/TestRestaurants').then(function(response) {
-           //     return response.json();
-           // }).then((Restaurants) => {
-//
-  //              const map = new google.maps.Map(document.getElementById('map'), {
-    ///                center: {lat: 35.78613674, lng: -119.4491591},
-       //             zoom:7
-         //       });
+        function createRestaurantMap(){
+            fetch('/TestRestaurants').then(function(response) {
+                return response.json();
+            }).then((Restaurants) => {
 
-           // Restaurants.forEach((Restaurant) => {
-             //   new google.maps.Marker({
-               //     position: {lat: Restaurant.lat, lng: Restaurant.lng},
-                 //   map: map
-                //});
-        //});
-        //});
-        //}
+                const map = new google.maps.Map(document.getElementById('map'), {
+                    center: {lat: 35.78613674, lng: -119.4491591},
+                    zoom:7
+                });
+
+
+            Restaurants.forEach((Restaurant) => {
+                new google.maps.Marker({
+                    position: {lat: Restaurant.lat, lng: Restaurant.lng},
+                    map: map
+                });
+        });
+        });
+        }
+
+
     </script>
     <style>
         #map{
