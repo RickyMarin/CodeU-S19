@@ -77,11 +77,7 @@ public class Datastore {
         * Old messages get score of 0
         */
         float sentimentScore = entity.getProperty("sentimentScore") == null? (float) 0.0 : ((Double) entity.getProperty("sentimentScore")).floatValue();
-<<<<<<< HEAD
         Message message = new Message(id, user, text, timestamp, sentimentScore); //have to add imageUrl
-=======
-        Message message = new Message(id, user, text, timestamp, sentimentScore);
->>>>>>> d0d970a40af4b21c4fc6eefc88251dd625387073
         messages.add(message);
       } catch (Exception e) {
         System.err.println("Error reading message.");
