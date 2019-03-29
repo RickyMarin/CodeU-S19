@@ -34,6 +34,9 @@ public class Datastore {
   /** Stores the Message in Datastore. */
   public void storeMessage(Message message) {
     Entity messageEntity = new Entity("Message", message.getId().toString());
+    if(message.getImageUrl() != null) {
+      messageEntity.setProperty("imageUrl", message.getImageUrl());
+    }
     messageEntity.setProperty("user", message.getUser());
     messageEntity.setProperty("text", message.getText());
     messageEntity.setProperty("timestamp", message.getTimestamp());
@@ -64,6 +67,7 @@ public class Datastore {
     for (Entity entity : results.asIterable()) {
       try {
         String idString = entity.getKey().getName();
+        String imageUrl = (String) entity.getProperty("imageUrl");
         UUID id = UUID.fromString(idString);
         String text = (String) entity.getProperty("text");
         String user = (String) entity.getProperty("user");
@@ -73,7 +77,7 @@ public class Datastore {
         * Old messages get score of 0
         */
         float sentimentScore = entity.getProperty("sentimentScore") == null? (float) 0.0 : ((Double) entity.getProperty("sentimentScore")).floatValue();
-        Message message = new Message(id, user, text, timestamp, sentimentScore);
+        Message message = new Message(id, user, text, timestamp, sentimentScore); //have to add imageUrl
         messages.add(message);
       } catch (Exception e) {
         System.err.println("Error reading message.");
