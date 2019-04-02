@@ -36,24 +36,35 @@ function showMessageFormIfViewingSelf() {
   fetch('/login-status')
       .then((response) => {
         return response.json();
+
       })
       .then((loginStatus) => {
         if (loginStatus.isLoggedIn &&
             loginStatus.username == parameterUsername) {
-          fetchImageUploadUrlAndShowForm();
+          const messageForm = document.getElementById('message-form');
+          messageForm.classList.remove('hidden');
+          document.getElementById('about-me-form').classList.remove('hidden');
         }
       });
 }
-
-function fetchImageUploadUrlAndShowForm() {
-  fetch('/image-upload-url')
+/** Fetches messages and add them to the page. */
+function fetchMessages() {
+  const url = '/messages?user=' + parameterUsername;
+  fetch(url)
       .then((response) => {
-        return response.text();
+        return response.json();
       })
-      .then((imageUploadUrl) => {
-        const messageForm = document.getElementById('message-form');
-        messageForm.action = imageUploadUrl;
-        messageForm.classList.remove('hidden');
+      .then((messages) => {
+        const messagesContainer = document.getElementById('message-container');
+        if (messages.length == 0) {
+          messagesContainer.innerHTML = '<p>This user has no posts yet.</p>';
+        } else {
+          messagesContainer.innerHTML = '';
+        }
+        messages.forEach((message) => {
+          const messageDiv = buildMessageDiv(message);
+          messagesContainer.appendChild(messageDiv);
+        });
       });
 }
 function fetchAboutMe(){
