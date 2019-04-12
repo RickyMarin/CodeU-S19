@@ -90,7 +90,7 @@ function buildMessageDiv(message) {
   const headerDiv = document.createElement('div');
   headerDiv.classList.add('message-header');
   headerDiv.appendChild(document.createTextNode(
-    message.user + ' - ' +
+    message.user + ' is at ' + message.location + ' - ' +
     new Date(message.timestamp) + ' [' + message.sentimentScore + ']'));
 
   const bodyDiv = document.createElement('div');

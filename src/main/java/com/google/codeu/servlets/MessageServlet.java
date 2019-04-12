@@ -75,7 +75,7 @@ public class MessageServlet extends HttpServlet {
   private float getSentimentScore(String text) throws IOException {
 
     Document doc = Document.newBuilder().setContent(text).setType(Type.PLAIN_TEXT).build();
- 
+
     LanguageServiceClient languageService = LanguageServiceClient.create();
     Sentiment sentiment = languageService.analyzeSentiment(doc).getDocumentSentiment();
     languageService.close();
@@ -96,6 +96,7 @@ public class MessageServlet extends HttpServlet {
     String user = userService.getCurrentUser().getEmail();
 
     String userText = Jsoup.clean(request.getParameter("text"),Whitelist.none());
+    String userLocation = Jsoup.clean(request.getParameter("location"),Whitelist.none());
 
     float sentimentScore = getSentimentScore(userText);
 
@@ -103,8 +104,8 @@ public class MessageServlet extends HttpServlet {
     String replacement = "<img src=\"$1\"/>";
     String textWithImagesReplaced = userText.replaceAll(regex, replacement);
 
-    Message message = new Message(user, textWithImagesReplaced, sentimentScore);
-  
+    Message message = new Message(user, textWithImagesReplaced, sentimentScore, userLocation);
+
     datastore.storeMessage(message);
 
     response.sendRedirect("/user-page.html?user=" + user);
