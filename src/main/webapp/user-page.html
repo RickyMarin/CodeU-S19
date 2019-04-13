@@ -63,6 +63,26 @@ limitations under the License.
         height: 100px;
         width: 99%;
     }
+    #map {
+        height: 800px;
+    }
+    html, body {
+        height: 50%;
+        margin: 0;
+        padding: 0;
+    }
+    #floating-panel {
+        position: absolute;
+        left: 25%;
+        z-index: 5;
+        background-color: #fff;
+        padding: 5px;
+        border: 1px solid #999;
+        text-align: center;
+        font-family: 'Roboto','sans-serif';
+        line-height: 30px;
+        padding-left: 10px;
+    }
 </style>
 <nav>
     <ul id="navigation">
@@ -91,5 +111,13 @@ limitations under the License.
         <input type="submit" value="Submit">
     </form>
 </div>
+<div id="floating-panel">
+    <input id="address" type="textbox" value="Charlottesville, Va">
+    <input id="submit" type="button" value="Insert Address">
+</div>
+<div id="map"></div>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDWeja7PB1u4tKPCJSmArbkC1Ze3HlyNVU&callback=initMap">
+</script>
 </body>
 </html>
