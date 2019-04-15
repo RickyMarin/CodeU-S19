@@ -102,10 +102,6 @@ function fetchAboutMe(){
  * @return {Element}
  */
 function buildMessageDiv(message) {
-  if(message.imageUrl){
-    bodyDiv.innerHTML += '<br/>';
-    bodyDiv.innerHTML += '<img src="' + message.imageUrl + '" />';
-  }
 
   const headerDiv = document.createElement('div');
   headerDiv.classList.add('message-header');
@@ -116,11 +112,17 @@ function buildMessageDiv(message) {
   const bodyDiv = document.createElement('div');
   bodyDiv.classList.add('message-body');
   bodyDiv.innerHTML = message.text;
+  console.log(message);
 
   const messageDiv = document.createElement('div');
   messageDiv.classList.add('message-div');
   messageDiv.appendChild(headerDiv);
   messageDiv.appendChild(bodyDiv);
+
+  if(message.imageUrl){
+    bodyDiv.innerHTML += '<br/>';
+    bodyDiv.innerHTML += '<img src="' + message.imageUrl + '" />';
+  }
 
   return messageDiv;
 }
