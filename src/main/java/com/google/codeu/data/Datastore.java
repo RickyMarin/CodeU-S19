@@ -39,6 +39,13 @@ public class Datastore {
     messageEntity.setProperty("timestamp", message.getTimestamp());
     messageEntity.setProperty("sentimentScore", message.getSentimentScore());
     messageEntity.setProperty("location", message.getLocation());
+
+    //added by Hedaya
+    if(message.getImageUrl() != null) {
+        messageEntity.setProperty("imageUrl", message.getImageUrl());
+    }
+    //end
+
     datastore.put(messageEntity);
   }
 
@@ -75,7 +82,9 @@ public class Datastore {
         * Old messages get score of 0
         */
         float sentimentScore = entity.getProperty("sentimentScore") == null? (float) 0.0 : ((Double) entity.getProperty("sentimentScore")).floatValue();
+        String imageUrl = (String) entity.getProperty("imageUrl");
         Message message = new Message(id, user, text, timestamp, sentimentScore, location);
+        message.setImageUrl(imageUrl);
         messages.add(message);
       } catch (Exception e) {
         System.err.println("Error reading message.");
