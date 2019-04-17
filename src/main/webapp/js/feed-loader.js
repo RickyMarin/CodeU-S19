@@ -112,8 +112,11 @@
    return linkElement;
  }
 
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDWeja7PB1u4tKPCJSmArbkC1Ze3HlyNVU&callback=initMap">
+
  // Fetch data and populate the UI of the page.
  function buildUI(){
   addLoginOrLogoutLinkToNavigation();
   fetchMessages();
+  initMap();
  }
