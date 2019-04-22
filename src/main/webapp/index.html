@@ -20,19 +20,38 @@ limitations under the License.
     <meta charset="UTF-8">
     <title>Are U Hungry?</title>
     <style>
+      .content {
+        max-width: 500px;
+        margin: auto;
+      }
+
       body{
-        background-color: #b8f3fc;
+        background: url(https://media3.giphy.com/media/4cIoYl5JW1bcQ/giphy.gif);
       }
 
       p{
-        color: white;
-        font-size: 24pt;
+        color: #000000;
+        font-size: 20pt;
         text-align: center;
       }
 
-      h1{
-        border: thin solid white;
-        text-align: center;
+      #header{
+        background-image: url(https://blog.flamingtext.com/blog/2019/04/18/flamingtext_com_1555607458_785495032.png);
+        background-repeat: no-repeat;
+        height: 150px;
+        width: 500px;
+        margin: 0 auto;
+      }
+
+      #wrapper {
+        width: 800px;
+        height: 800px;
+        background-color: #a4f9e7;
+        display: inline-block;
+      }
+
+
+
     </style>
     <link rel="stylesheet" href="/css/main.css">
     <script src="/js/navigation-loader.js"></script>
@@ -43,9 +62,15 @@ limitations under the License.
         <li><a href="/">Home</a></li>
       </ul>
     </nav>
-    <h1>Are U Hungry?</h1>
-    <p>Just because you are a college student doesn't mean you have to eat ramen and pizza everyday (even though it's tasty)!
-    Explore the dining possibilities around your campus while connecting with other food aficionados, new restaurants, and students looking to try something new!
+
+    <div id="wrapper">
+    <h1 id="header">
+    </h1>
+      <p>Just because you are a college student doesn't mean you have to eat ramen and pizza everyday (even though it's tasty)!
     </p>
+      <p>Explore the dining possibilities around your campus while connecting with other food aficionados, new restaurants, and students looking to try something new!
+      </p>
+    </div>
+
   </body>
 </html>

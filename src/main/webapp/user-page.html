@@ -27,12 +27,11 @@ limitations under the License.
 <style>
     body{
         margin: 0;
-        background: linear-gradient(white, #b8f3fc) fixed;
-        font-family: sans-serif;
+        background: url(https://media3.giphy.com/media/4cIoYl5JW1bcQ/giphy.gif);
+        font-size: 18px;
     }
 
     nav{
-        background-color: #b8f3fc;
         font-size: 18pt;
         padding: 10px;
     }
@@ -47,7 +46,7 @@ limitations under the License.
     }
 
     input[type=submit]{
-        background-color: #b8f3fc;
+        background-color: #ffffff;
         height: 50px;
         width: 100px;
         font-size: 14pt;
@@ -63,20 +62,29 @@ limitations under the License.
         height: 100px;
         width: 99%;
     }
+
+    #wrapper {
+        width: 800px;
+        height: 800px;
+        background-color: #a4f9e7;
+        display: inline-block;
+      }
+
 </style>
 <nav>
     <ul id="navigation">
       <li><a href="/">Home</a></li>
     </ul>
 </nav>
-<h1 id="page-title">User Page</h1>
 
+<h1 id="page-title">User Page</h1>
+    <div id="wrapper">
 <form id="message-form" action="/messages" method="POST" class="hidden" enctype="multipart/form-data">
     Enter a new message:
     <br/>
     <textarea name="text" id="message-input"></textarea>
     <br/>
-    Enter a resturant:
+    Enter a restaurant:
     <input type="text" name="location" id="location-input" placeholder="Wendy's">
     <br/>
     Add an image to your message:
@@ -96,6 +104,7 @@ limitations under the License.
         <br/>
         <input type="submit" value="Submit">
     </form>
+</div>
 </div>
 </body>
 </html>
