@@ -43,7 +43,9 @@ function showMessageFormIfViewingSelf() {
             loginStatus.username == parameterUsername) {
           const messageForm = document.getElementById('message-form');
           messageForm.classList.remove('hidden');
+
           document.getElementById('about-me-form').classList.remove('hidden');
+          document.getElementById('submit').classList.remove('hidden');
         }
       });
 }
@@ -173,7 +175,7 @@ function geocodeAddress(geocoder, resultsMap) {
       resultsMap.setCenter(results[0].geometry.location);
       // MapsArray.add(gson.toJsonTree(new Restaurant(results[0].geometry.lat, results[0].geometry.lang)));
       var infowindow = new google.maps.InfoWindow({
-        content: "This is my favorite restaurant!"
+        content: "This is my favorite restaurant! "
       });
       var marker = new google.maps.Marker({
         map: resultsMap,
