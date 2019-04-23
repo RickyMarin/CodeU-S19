@@ -69,8 +69,10 @@ public class Datastore {
         String text = (String) entity.getProperty("text");
         String user = (String) entity.getProperty("user");
         long timestamp = (long) entity.getProperty("timestamp");
-        String location = (String) entity.getProperty("location");
-
+        /*
+        * Old messages get location value of "an undefined resturant"
+        */
+        String location = entity.getProperty("location") == null? (String) "an undefined resturant" : (String) entity.getProperty("location");
         /*
         * Old messages get score of 0
         */

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Restaurant Testing</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+        #map {
+            height: 800px;
+        }
+        html, body {
+            height: 50%;
+            margin: 0;
+            padding: 0;
+        }
+        #floating-panel {
+            position: absolute;
+            top: 10px;
+            left: 25%;
+            z-index: 5;
+            background-color: #fff;
+            padding: 5px;
+            border: 1px solid #999;
+            text-align: center;
+            font-family: 'Roboto','sans-serif';
+            line-height: 30px;
+            padding-left: 10px;
+        }
+    </style>
+</head>
+<body>
+<div id="floating-panel">
+    <input id="address" type="textbox" value="Charlottesville, Va">
+    <input id="submit" type="button" value="Insert Address">
+</div>
+<div id="map"></div>
+<script>
+    MapsArray = new JsonArray();
+    function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 8,
+            center: {lat: 38.046252, lng: -78.506744}
+        });
+        var geocoder = new google.maps.Geocoder();
+
+        document.getElementById('submit').addEventListener('click', function() {
+            geocodeAddress(geocoder, map);
+        });
+    }
+
+    function geocodeAddress(geocoder, resultsMap) {
+        var address = document.getElementById('address').value;
+        geocoder.geocode({'address': address}, function(results, status) {
+            if (status === 'OK') {
+                //results.forEach((Restaurant) => {
+                  //  var marker= new google.maps.Marker({
+                    //    position: {lat: Restaurant.geometry.lat, lng: Restaurant.geometry.lang},
+                      //  map: resultsMap,})})
+                resultsMap.setCenter(results[0].geometry.location);
+               // MapsArray.add(gson.toJsonTree(new Restaurant(results[0].geometry.lat, results[0].geometry.lang)));
+                var marker = new google.maps.Marker({
+                    map: resultsMap,
+                    position: results[0].geometry.location
+
+                });
+            } else {
+                alert('Geocode was not successful for the following reason: ' + status);
+            }
+
+        });
+    }
+
+    function createMarkerForEdit(lat, lng,){
+
+        //if(editMarker){
+        //  editMarker.setMap(null);
+        // }
+
+        editMarker = new google.maps.Marker({
+            position: {lat: lat, lng: lng},
+            map: map
+        });
+
+        const infoWindow = new google.maps.InfoWindow({
+            content: buildInfoWindowInput(lat, lng)
+        });
+
+        google.maps.event.addListener(infoWindow, 'closeclick', () => {
+            editMarker.setMap(null);
+        });
+
+        infoWindow.open(map, editMarker);
+    }
+    function buildInfoWindowInput(lat, lng){
+        const textBox = document.createElement('textarea');
+        const button = document.createElement('button');
+        button.appendChild(document.createTextNode('Submit'));
+
+        button.onclick = () => {
+            createMarkerForDisplay(lat, lng, textBox.value);
+            editMarker.setMap(null);
+        };
+
+        const containerDiv = document.createElement('div');
+        containerDiv.appendChild(textBox);
+        containerDiv.appendChild(document.createElement('br'));
+        containerDiv.appendChild(button);
+
+        return containerDiv;}
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDWeja7PB1u4tKPCJSmArbkC1Ze3HlyNVU&callback=initMap">
+</script>
+</body>
+</html>
