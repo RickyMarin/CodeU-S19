@@ -26,6 +26,7 @@ public class Message {
   private long timestamp;
   private float sentimentScore;
   private String location;
+  private String imageUrl;
 
   /**
    * Constructs a new {@link Message} posted by {@code user} with {@code text} content. Generates a
@@ -43,6 +44,16 @@ public class Message {
     this.sentimentScore = sentimentScore;
     this.location = location;
   }
+
+  //added by Hedaya
+  public String getImageUrl(){
+    return imageUrl;
+  }
+
+  public void setImageUrl(String setImage){
+    imageUrl = setImage;
+  }
+  //end
 
   public UUID getId() {
     return id;
