@@ -116,4 +116,5 @@
  function buildUI(){
   addLoginOrLogoutLinkToNavigation();
   fetchMessages();
+  initMap();
  }

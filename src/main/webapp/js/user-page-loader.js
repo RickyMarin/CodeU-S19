@@ -41,10 +41,13 @@ function showMessageFormIfViewingSelf() {
       .then((loginStatus) => {
         if (loginStatus.isLoggedIn &&
             loginStatus.username == parameterUsername) {
+
             fetchImageUploadUrlAndShowForm();
-//          const messageForm = document.getElementById('message-form');
-//          messageForm.classList.remove('hidden');
-//          document.getElementById('about-me-form').classList.remove('hidden');
+          const messageForm = document.getElementById('message-form');
+         messageForm.classList.remove('hidden');
+         document.getElementById('about-me-form').classList.remove('hidden');
+
+
         }
       });
 }
@@ -176,6 +179,43 @@ function createLink(url, text) {
   linkElement.href = url;
   return linkElement;
 }
+function initMap() {
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 8,
+    center: {lat: 38.046252, lng: -78.506744}
+  });
+  var geocoder = new google.maps.Geocoder();
+
+  document.getElementById('submit').addEventListener('click', function() {
+    geocodeAddress(geocoder, map);
+  });
+}
+function geocodeAddress(geocoder, resultsMap) {
+  var address = document.getElementById('address').value;
+  geocoder.geocode({'address': address}, function(results, status) {
+    if (status === 'OK') {
+      resultsMap.setCenter(results[0].geometry.location);
+      // MapsArray.add(gson.toJsonTree(new Restaurant(results[0].geometry.lat, results[0].geometry.lang)));
+      var infowindow = new google.maps.InfoWindow({
+        content: "This is my favorite restaurant! "
+      });
+      var marker = new google.maps.Marker({
+        map: resultsMap,
+        position: results[0].geometry.location
+
+      });
+
+      marker.addListener('click', function() {
+        infowindow.open(resultsMap, marker);
+      });
+    } else {
+      alert('Geocode was not successful for the following reason: ' + status);
+    }
+
+  });
+
+
+}
 
 /** Fetches data and populates the UI of the page. */
 function buildUI() {
@@ -184,5 +224,5 @@ function buildUI() {
   fetchAboutMe();
   showMessageFormIfViewingSelf();
   fetchMessages();
-
+  initMap();
 }
