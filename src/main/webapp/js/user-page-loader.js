@@ -107,9 +107,10 @@ function buildMessageDiv(message) {
 
   const headerDiv = document.createElement('div');
   headerDiv.classList.add('message-header');
+  const date = new Date(message.timestamp);
   headerDiv.appendChild(document.createTextNode(
-    message.user + ' is at ' + message.location + ' - ' +
-    new Date(message.timestamp) + ' [' + message.sentimentScore + ']'));
+    message.user.split('@', 1)[0] + ' is at ' + message.location + ' - ' + date.getMonth() + ' ' + date.getDate()
+     + ', ' + date.getYear() + ' [Rate: ' + message.sentimentScore + ']'));
 
   const bodyDiv = document.createElement('div');
   bodyDiv.classList.add('message-body');

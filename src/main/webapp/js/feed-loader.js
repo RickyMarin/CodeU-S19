@@ -36,14 +36,16 @@
  function buildMessageDiv(message){
   const usernameDiv = document.createElement('div');
   usernameDiv.classList.add("left-align");
-  usernameDiv.appendChild(document.createTextNode(message.user));
+  usernameDiv.appendChild(document.createTextNode(message.user.split('@', 1)[0] + ' is at ' + message.location + ' - '));
 
   /*
   * Div for time and sentiment score
   */
   const timeSentDiv = document.createElement('div');
+  const date = new Date(message.timestamp);
   timeSentDiv.classList.add('right-align');
-  timeSentDiv.appendChild(document.createTextNode((new Date(message.timestamp))+' [' + message.sentimentScore + ']'));
+  timeSentDiv.appendChild(document.createTextNode(date.getMonth() + ' ' + date.getDate()
+   + ', ' + date.getYear() ' [Rate: ' + message.sentimentScore + ']'));
 
   const headerDiv = document.createElement('div');
   headerDiv.classList.add('message-header');
