@@ -42,8 +42,10 @@
   * Div for time and sentiment score
   */
   const timeSentDiv = document.createElement('div');
+  const date = new Date(message.timestamp);
   timeSentDiv.classList.add('right-align');
-  timeSentDiv.appendChild(document.createTextNode((new Date(message.timestamp))+' [Rate: ' + message.sentimentScore + ']'));
+  timeSentDiv.appendChild(document.createTextNode(date.getMonth() + ' ' + date.getDate()
+   + ' ' + date.getYear() ' [Rate: ' + message.sentimentScore + ']'));
 
   const headerDiv = document.createElement('div');
   headerDiv.classList.add('message-header');
