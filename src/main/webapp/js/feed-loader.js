@@ -45,7 +45,7 @@
   const date = new Date(message.timestamp);
   timeSentDiv.classList.add('right-align');
   timeSentDiv.appendChild(document.createTextNode(date.getMonth() + ' ' + date.getDate()
-   + ' ' + date.getYear() ' [Rate: ' + message.sentimentScore + ']'));
+   + ', ' + date.getYear() ' [Rate: ' + message.sentimentScore + ']'));
 
   const headerDiv = document.createElement('div');
   headerDiv.classList.add('message-header');
