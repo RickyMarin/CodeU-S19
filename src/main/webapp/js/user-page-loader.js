@@ -41,14 +41,30 @@ function showMessageFormIfViewingSelf() {
       .then((loginStatus) => {
         if (loginStatus.isLoggedIn &&
             loginStatus.username == parameterUsername) {
-          const messageForm = document.getElementById('message-form');
-          messageForm.classList.remove('hidden');
 
-          document.getElementById('about-me-form').classList.remove('hidden');
-          document.getElementById('submit').classList.remove('hidden');
+            fetchImageUploadUrlAndShowForm();
+          const messageForm = document.getElementById('message-form');
+         messageForm.classList.remove('hidden');
+         document.getElementById('about-me-form').classList.remove('hidden');
+
+
         }
       });
 }
+
+function fetchImageUploadUrlAndShowForm(){
+    fetch('/image-upload-url')
+        .then((response) => {
+            return response.text();
+        })
+        .then((imageUploadUrl) => {
+            const messageForm = document.getElementById('message-form');
+            messageForm.action = imageUploadUrl;
+            messageForm.classList.remove('hidden');
+        });
+}
+
+
 /** Fetches messages and add them to the page. */
 function fetchMessages() {
   const url = '/messages?user=' + parameterUsername;
@@ -89,6 +105,7 @@ function fetchAboutMe(){
  * @return {Element}
  */
 function buildMessageDiv(message) {
+
   const headerDiv = document.createElement('div');
   headerDiv.classList.add('message-header');
   const date = new Date(message.timestamp);
@@ -99,11 +116,17 @@ function buildMessageDiv(message) {
   const bodyDiv = document.createElement('div');
   bodyDiv.classList.add('message-body');
   bodyDiv.innerHTML = message.text;
+  console.log(message);
 
   const messageDiv = document.createElement('div');
   messageDiv.classList.add('message-div');
   messageDiv.appendChild(headerDiv);
   messageDiv.appendChild(bodyDiv);
+
+  if(message.imageUrl){
+    bodyDiv.innerHTML += '<br/>';
+    bodyDiv.innerHTML += '<img src="' + message.imageUrl + '" />';
+  }
 
   return messageDiv;
 }
@@ -157,7 +180,6 @@ function createLink(url, text) {
   linkElement.href = url;
   return linkElement;
 }
-MapsArray = new JsonArray();
 function initMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 8,
